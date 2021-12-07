@@ -8,8 +8,9 @@ import networkx as nx
 from sklearn.metrics import normalized_mutual_info_score
 from networkx.generators.community import LFR_benchmark_graph as lfr
 
-
-### utils
+###------------------------###
+### utils  ###
+###------------------------###
 
 import sys
 import threading
@@ -120,7 +121,9 @@ def normalized_mutual_info_acc(coms_pred, coms_true):
     )
 
 
+###------------------------###
 ### generate graph ###
+###------------------------###
 
 
 def generate_graph(n_low=250, n_high=10000):
