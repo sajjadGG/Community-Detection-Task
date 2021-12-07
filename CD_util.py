@@ -123,8 +123,29 @@ def normalized_mutual_info_acc(coms_pred, coms_true):
 ### generate graph ###
 
 
+def generate_graph(n_low=250, n_high=10000):
+    n = np.random.randint(n_low, n_high)
+    tau1 = 3
+    tau2 = 1.5
+    mu = np.random.uniform(0.03, 0.75)
+    max_degree = int(0.1 * n)
+    max_community = int(0.1 * n)
+    average_degree = 20
+    G = lfr(
+        n,
+        tau1,
+        tau2,
+        mu,
+        average_degree=average_degree,
+        max_community=max_community,
+        max_degree=max_degree,
+        seed=10,
+    )
+    return G
+
+
 @exit_after(5)
-def generate_graph(n, tau1, tau2, mu, average_degree, min_community):
+def generate_graph_full(n, tau1, tau2, mu, average_degree, min_community):
     return lfr(
         n, tau1, tau2, mu, average_degree=average_degree, min_community=min_community
     )
@@ -165,19 +186,3 @@ def generate_random_lfr(
         raise ("Max iter exceeded")
 
     return G
-
-
-class Parameter:
-    def __init__(self, name: str, value) -> None:
-        self.name = name
-        self.value = value
-
-    def __str__(self) -> str:
-        return f"{self.name} : {str(self.value)}"
-
-
-class Experiment:
-    def __init__(self, parameter_initalizer) -> None:
-        self.parameters = []
-        self.parameters = parameter_initalizer(self.parameters)
-        self.metrics = []
